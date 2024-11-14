@@ -1,0 +1,16 @@
+{
+    "name": "msy/moka-integration",
+    "description": "Moka Ödeme Sistemi Entegrasyonu - Laravel",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Msy\\MokaIntegration\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "4Rival and Börü"
+        }
+    ],
+    "require": {}
+}
