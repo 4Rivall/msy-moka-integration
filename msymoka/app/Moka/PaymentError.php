@@ -9,7 +9,7 @@ class PaymentError
      *
      * @var array
      */
-    protected static $errors = [
+    protected static array $errors = [
         // Önceki hata kodları
         '000' => 'Genel Hata',
         '001' => 'Kart Sahibi Onayı Alınamadı',
@@ -85,7 +85,7 @@ class PaymentError
      * @param string $code
      * @return string
      */
-    public static function getMessage($code)
+    public static function getMessage(string $code): string
     {
         return self::$errors[$code] ?? 'Bilinmeyen Hata';
     }

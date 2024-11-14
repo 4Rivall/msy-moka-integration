@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Services\Moka\Payment;
+namespace App\Moka\Payment;
 
-use App\Services\MokaService;
+
+use App\Moka\MokaService;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 
 class NonThreeDSecurePayment
 {
-    protected $mokaService;
+    protected MokaService $mokaService;
 
     public function __construct(MokaService $mokaService)
     {
@@ -20,7 +22,7 @@ class NonThreeDSecurePayment
      * @param array $paymentDetails
      * @return array
      */
-    public function processPayment(array $paymentDetails)
+    public function processPayment(array $paymentDetails): array
     {
         // Moka Authentication Request
         $authData = [
@@ -66,7 +68,7 @@ class NonThreeDSecurePayment
      * @param array $paymentDetails
      * @return string
      */
-    private function generateCheckKey(array $paymentDetails)
+    private function generateCheckKey(array $paymentDetails): string
     {
         $checkString = $paymentDetails['DealerCode'] . 'MK' . $paymentDetails['Username'] . 'PD' . $paymentDetails['Password'];
         return hash('sha256', $checkString);
@@ -77,7 +79,7 @@ class NonThreeDSecurePayment
      *
      * @param array $authData
      * @param array $paymentData
-     * @return \Illuminate\Http\Client\Response
+     * @return Response
      */
     private function sendPaymentRequest(array $authData, array $paymentData)
     {
@@ -90,10 +92,10 @@ class NonThreeDSecurePayment
     /**
      * Handle the response from Moka API.
      *
-     * @param \Illuminate\Http\Client\Response $response
+     * @param Response $response
      * @return array
      */
-    private function handleResponse($response)
+    private function handleResponse(Response $response): array
     {
         $data = $response->json();
 
@@ -112,7 +114,7 @@ class NonThreeDSecurePayment
     }
 }
 
-/* Example: 
+/* Example:
 
 use App\Services\Moka\Payment\ThreeDSecurePayment;
 
@@ -166,6 +168,6 @@ if ($response['success']) {
 } else {
     echo 'Payment Failed. Error: ' . $response['error'];
 }
- 
+
 
 */
