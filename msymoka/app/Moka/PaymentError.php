@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Moka;
+namespace App\Moka;
 
 class PaymentError
 {
