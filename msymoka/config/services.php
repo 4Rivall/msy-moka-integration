@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    'moka' => [
+        'dealer_code' =>'139378',
+        'username' =>'54221a57-7de7-4835-bef9-96c493abb66d',
+        'password' =>'2bfdee84-b66e-4f25-bcbf-9b996fb81eac',
+    ],
+
 ];

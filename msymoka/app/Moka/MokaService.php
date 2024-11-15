@@ -1,15 +1,16 @@
 <?php
 namespace App\Moka;
 
+use App\Moka\Payment\Payment;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
 
 class MokaService
 {
-    protected string $dealerCode;
-    protected string $username;
-    protected string $password;
+    private string $dealerCode;
+    private string $username;
+    private string $password;
     protected string $checkKey;
 
     public function __construct()
@@ -23,7 +24,7 @@ class MokaService
     /**
      * SHA-256 ile CheckKey oluşturma
      */
-    public function generateCheckKey(): string
+    private function generateCheckKey(): string
     {
         $checkString = $this->dealerCode . 'MK' . $this->username . 'PD' . $this->password;
         return hash('sha256', $checkString);
@@ -73,7 +74,7 @@ class MokaService
 
         // If there's an error, get the error message
         if ($resultCode && $resultCode !== '000' && !$data) {
-            $errorMessage = PaymentError::getMessage($resultCode);
+            $errorMessage = Payment::getErrorMessage($resultCode);
 
             // Log the error
             Log::error('Moka API Request failed', [

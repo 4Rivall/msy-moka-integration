@@ -7,7 +7,7 @@ class MokaService
 protected string $dealerCode;
 protected string $username;
 protected string $password;
-protected $checkKey;
+private $checkKey;
 
 public function __construct()
 {

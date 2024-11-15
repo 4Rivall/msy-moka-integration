@@ -1,20 +1,16 @@
 <?php 
 
-namespace App\Moka\Payment;
+namespace App\Moka\Payment\NonThreeDSecurePayment;
 
-use App\Moka\MokaService;
-use App\Services\NotificationService;
-use App\Services\MokaApiService;
+use App\Moka\Payment;
 
-class NonThreeDSecurePaymentProcessor implements NonThreeDSecurePaymentInterface
+class NonThreeDSecurePaymentProcessor extends Payment
 {
-    use NonThreeDSecurePaymentTrait;
 
-    protected MokaService $mokaService;
 
-    public function __construct(MokaService $mokaService)
+    public function __construct()
     {
-        $this->mokaService = $mokaService;
+        return self::processPayment(dd($this->data));
     }
 
      /**
@@ -23,28 +19,10 @@ class NonThreeDSecurePaymentProcessor implements NonThreeDSecurePaymentInterface
      * @param array $paymentDetails
      * @return array
      */
-    public function processPayment(array $paymentDetails): array
+    public function processPayment($paymentDetails)
     {
-        $authData = $this->mokaService->getAuthData();
-        
-        $paymentData = $this->preparePaymentData($authData, $paymentDetails);
-
-        $response = $this->mokaService->sendRequest($paymentData);
-
-        // Notifications
-        $this->sendSms(
-            $paymentDetails['PhoneNumber'],
-            'Your payment has been processed successfully!'
-        );
-
-        $this->sendEmail(
-            $paymentDetails['Email'],
-            'Payment Confirmation',
-            'Your payment was successful. Thank you!'
-        );
-
-        return $this->handleResponse($response);
-        
+       
+ 
     }
 
 
