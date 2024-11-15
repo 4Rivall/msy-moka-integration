@@ -16,38 +16,40 @@ trait NonThreeDSecurePaymentTrait
      */
     public function preparePaymentData(array $paymentDetails, array $authData): array
     {
+        // Doğrudan veri tipini belirtmek zor olsa da, parametreleri doğrulamak için içeriği kontrol edebiliriz.
         return [
             'PaymentDealerAuthentication' => [
-                'DealerCode' => $authData['DealerCode'],
-                'Username' => $authData['Username'],
-                'Password' => $authData['Password'],
-                'CheckKey' => $authData['CheckKey'],
+                'DealerCode' => (string) $authData['DealerCode'],
+                'Username' => (string) $authData['Username'],
+                'Password' => (string) $authData['Password'],
+                'CheckKey' => (string) $authData['CheckKey'],
             ],
             'PaymentDealerRequest' => [
-                'CardHolderFullName' => $paymentDetails['CardHolderFullName'],
-                'CardNumber' => $paymentDetails['CardNumber'],
-                'ExpMonth' => $paymentDetails['ExpMonth'],
-                'ExpYear' => $paymentDetails['ExpYear'],
-                'CvcNumber' => $paymentDetails['CvcNumber'],
-                'CardToken' => $paymentDetails['CardToken'],
-                'Amount' => $paymentDetails['Amount'],
-                'Currency' => $paymentDetails['Currency'],
-                'InstallmentNumber' => $paymentDetails['InstallmentNumber'],
-                'ClientIP' => $paymentDetails['ClientIP'],
-                'OtherTrxCode' => $paymentDetails['OtherTrxCode'],
-                'SubMerchantName' => $paymentDetails['SubMerchantName'],
-                'IsPoolPayment' => $paymentDetails['IsPoolPayment'],
-                'IsTokenized' => $paymentDetails['IsTokenized'],
-                'IntegratorId' => $paymentDetails['IntegratorId'],
-                'Software' => $paymentDetails['Software'],
-                'Description' => $paymentDetails['Description'],
-                'IsPreAuth' => $paymentDetails['IsPreAuth'],
-                'BuyerInformation' => $paymentDetails['BuyerInformation'],
-                'CustomerInformation' => $paymentDetails['CustomerInformation'],
-                'BasketProduct' => $paymentDetails['BasketProduct'],
+                'CardHolderFullName' => (string) $paymentDetails['CardHolderFullName'],
+                'CardNumber' => (string) $paymentDetails['CardNumber'],
+                'ExpMonth' => (string) $paymentDetails['ExpMonth'],
+                'ExpYear' => (string) $paymentDetails['ExpYear'],
+                'CvcNumber' => (string) $paymentDetails['CvcNumber'],
+                'CardToken' => (string) $paymentDetails['CardToken'],
+                'Amount' => (float) $paymentDetails['Amount'],  // Zorunlu float tipine dönüştürme
+                'Currency' => (string) $paymentDetails['Currency'],
+                'InstallmentNumber' => (int) $paymentDetails['InstallmentNumber'],  // Zorunlu integer tipine dönüştürme
+                'ClientIP' => (string) $paymentDetails['ClientIP'],
+                'OtherTrxCode' => (string) $paymentDetails['OtherTrxCode'],
+                'SubMerchantName' => (string) $paymentDetails['SubMerchantName'],
+                'IsPoolPayment' => (int) $paymentDetails['IsPoolPayment'],
+                'IsTokenized' => (int) $paymentDetails['IsTokenized'],
+                'IntegratorId' => (int) $paymentDetails['IntegratorId'],
+                'Software' => (string) $paymentDetails['Software'],
+                'Description' => (string) $paymentDetails['Description'],
+                'IsPreAuth' => (int) $paymentDetails['IsPreAuth'],
+                'BuyerInformation' => (array) $paymentDetails['BuyerInformation'],  // BuyerInformation zorunlu array
+                'CustomerInformation' => (array) $paymentDetails['CustomerInformation'],  // CustomerInformation zorunlu array
+                'BasketProduct' => (array) $paymentDetails['BasketProduct'],  // BasketProduct zorunlu array
             ]
         ];
     }
+    
     
 
     /**

@@ -49,11 +49,8 @@ class MokaService
      * @param array $params
      * @return array
      */
-    public function sendRequest(array $paymentData): array
+    public function sendRequest(string $url, array $paymentData): array
     {
-
-        // Buraya TEST ve CANLI diye direkt url de alabiliriz. örn testte: https://service.refmoka.com
-        $url = "https://service.moka.com/PaymentDealer/DoDirectPayment";
 
         // Log the request details (optional)
         Log::info('Sending request to Moka API', [
@@ -61,7 +58,10 @@ class MokaService
             'params' => $paymentData
         ]);
 
-        $response = Http::post($url, $paymentData);
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json', // JSON içeriği gönderdiğimizi belirtiyoruz
+        ])->post($url, $paymentData); // $paymentData zaten bir array, bu JSON'a dönüştürülür
+        
 
         // Parse the JSON response from Moka
         $responseData = $response->json();
