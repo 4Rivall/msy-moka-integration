@@ -2,22 +2,30 @@
 
 namespace App\Moka;
 
-use App\Moka\MokaService;
+use App\Moka\Information\BinCheck;
 use App\Moka\Payment\NonThreeDSecurePayment\NonThreeDSecurePaymentProcessor;
 
-class Payment extends MokaService
+class Payment
 {
 
-    protected $data;
+    private $data;
 
-    public function __consturct(array $data)
+    public function __construct($data)
     {
         $this->data = $data;
     }
 
+    public function nonPay3d()
+    {
+        $process = new NonThreeDSecurePaymentProcessor();
+        return $process->non3dProcess($this->data);
+    }
 
-    public function nonPay3d() {
-        $test = new NonThreeDSecurePaymentProcessor();
+
+    public function binCheck()
+    {
+        $check = new BinCheck();
+        return $check->getBin($this->data);
     }
 
 
@@ -95,6 +103,12 @@ class Payment extends MokaService
         'PaymentDealer.DoDirectPayment3dRequest.BasketProductNotFoundInYourProductList' => 'Satılan ürünler sepete eklendiyse, geçerli ürün seçilmelidir.',
         'PaymentDealer.DoDirectPayment3dRequest.MustBeOneOfDealerProductIdOrProductCode' => 'Satılan ürünler sepete eklendiyse, ürün kodu veya moka ürün ID si girilmelidir.',
         'EX' => 'Beklenmeyen bir hata oluştu',
+        
+        // BIN  
+        'Dealer.CheckPaymentDealerAuthentication.InvalidRequest' => 'CheckKey hatalı ya da nesne hatalı ya da JSON bozuk olabilir.',
+        'Dealer.CheckPaymentDealerAuthentication.InvalidAccount	' => 'CheckKey hatalı ya da nesne hatalı ya da JSON bozuk olabilir.',
+        'PaymentDealer.GetBankCardInformation.DealerNotAllowed' => 'Bu bayinin izni yok.',
+        'Dealer.CheckPaymentDealerAuthentication.BinNumberNotFound' => 'Bin numarası bulunamadı..',
     ];
 
     /**
