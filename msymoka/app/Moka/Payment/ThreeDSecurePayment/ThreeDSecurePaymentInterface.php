@@ -11,7 +11,7 @@ interface ThreeDSecurePaymentInterface
 
     public function setCurrency(string $currency): void;
 
-    public function processPayment(): bool;
+    public function process(): bool;
 
     public function getPaymentStatus(): string;
 

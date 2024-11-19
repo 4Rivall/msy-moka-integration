@@ -4,6 +4,8 @@ namespace App\Moka;
 
 use App\Moka\Information\BinCheck;
 use App\Moka\Payment\NonThreeDSecurePayment\NonThreeDSecurePaymentProcessor;
+use App\Moka\Payment\OrtakPayment\OrtakPaymentProcessor;
+use App\Moka\Payment\ThreeDSecurePayment\ThreeDSecurePaymentProcessor;
 
 class Payment
 {
@@ -27,6 +29,19 @@ class Payment
         $check = new BinCheck();
         return $check->getBin($this->data);
     }
+
+    public function Pay3d()
+    {
+        $process = new ThreeDSecurePaymentProcessor();
+        return $process->process($this->data);
+    }
+
+    public function ortakOdeme()
+    {
+        $process = new OrtakPaymentProcessor();
+        return $process->ortakProcess($this->data);
+    }
+
 
 
 
