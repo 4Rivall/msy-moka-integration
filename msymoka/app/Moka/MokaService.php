@@ -63,4 +63,23 @@ class MokaService
             'Data' => $data,
         ];
     }
+
+    /**
+     * API response format
+     *
+     * @param string $resultCode
+     * @param string|null $resultMessage
+     * @param string|null $exception
+     * @param mixed $data
+     * @return array
+     */
+    protected function coPaymentResponse(string $resultCode, ?string $resultMessage, ?string $exception, mixed $data): array
+    {
+        return [
+            'ResultCode' => $resultCode,
+            'ResultMessage' => $resultMessage,
+            'Exception' => $exception,
+            'Data' => $data,
+        ];
+    }
 }

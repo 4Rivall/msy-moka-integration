@@ -16,5 +16,6 @@ Route::get('/hash', function () {
 });
 
 
-Route::get('index', [TestController::class,"index"]);
+Route::get('coPayment', [TestController::class,"index"]);
+Route::post('post.CoPayment', [TestController::class,"testCoPayment"])->name('testCoPayment');
 Route::get('testBin', [TestController::class,"testBin"]);

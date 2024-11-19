@@ -124,6 +124,7 @@ class Payment
         'Dealer.CheckPaymentDealerAuthentication.InvalidAccount	' => 'CheckKey hatalı ya da nesne hatalı ya da JSON bozuk olabilir.',
         'PaymentDealer.GetBankCardInformation.DealerNotAllowed' => 'Bu bayinin izni yok.',
         'Dealer.CheckPaymentDealerAuthentication.BinNumberNotFound' => 'Bin numarası bulunamadı..',
+        'ClientWebPos.CreateWebPosRequest.CustomerInfoIsRequiredToSaveTheCard' => 'Kartı kaydedebilmek için Müşteri bilgisi gereklidir.',
     ];
 
     /**
