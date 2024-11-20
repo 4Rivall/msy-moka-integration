@@ -3,6 +3,7 @@
 namespace App\Moka;
 
 use App\Moka\Information\BinCheck;
+use App\Moka\Payment\Card\SaveCardProcessor;
 use App\Moka\Payment\NonThreeDSecurePayment\NonThreeDSecurePaymentProcessor;
 use App\Moka\Payment\OrtakPayment\OrtakPaymentProcessor;
 use App\Moka\Payment\ThreeDSecurePayment\ThreeDSecurePaymentProcessor;
@@ -40,6 +41,12 @@ class Payment
     {
         $process = new OrtakPaymentProcessor();
         return $process->ortakProcess($this->data);
+    }
+
+    public function saveCard()
+    {
+        $process = new SaveCardProcessor();
+        return $process->saveCardProcess($this->data);
     }
 
 

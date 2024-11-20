@@ -77,6 +77,21 @@ class TestController extends Controller
         return $response;
     }
 
+    public function saveCard(Request $request)
+    {
+
+        $data = [
+            "PaymentDealerAuthentication" => $this->mokaService->getAuthData(),
+        ];
+
+
+        $payment = new Payment($data);
+        $response = $payment->saveCard();
+
+        return $response;
+
+    }
+
 
     public function x(Request $request)
     {
